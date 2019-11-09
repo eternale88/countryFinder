@@ -1,0 +1,25 @@
+{
+  "name": "petfinder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eternale88/petFinder.git"
+  },
+  "author": "Ethan Robbins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eternale88/petFinder/issues"
+  },
+  "homepage": "https://github.com/eternale88/petFinder#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "fetch-jsonp": "^1.1.3",
+    "parcel-bundler": "^1.12.4"
+  }
+}
