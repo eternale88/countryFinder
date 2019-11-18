@@ -119,6 +119,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"js/main.js":[function(require,module,exports) {
 var countryForm = document.querySelector('#country-form');
+var results = document.querySelector('#results');
 
 if (countryForm) {
   countryForm.addEventListener('submit', fetchCountries);
@@ -133,8 +134,12 @@ function fetchCountries(e) {
 
   fetch("https://restcountries.eu/rest/v2/name/".concat(country, "?fullText=true")).then(function (res) {
     return res.json();
-  }).then(function (data) {
-    return console.log(data);
+  }).then(function (country) {
+    console.log(country[0].flag);
+    var output = "\n        <div class=\"row\">\n          <div class=\"col-md-4\">\n            <img src=\"".concat(country[0].flag, "\" class=\"img-thumbnail\"/>\n          </div>\n        </div>\n      ");
+    results.innerHTML = '';
+    var doc = new DOMParser().parseFromString(output, 'text/html');
+    results.appendChild(doc.body);
   }).catch(function (err) {
     return err;
   });
@@ -167,7 +172,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62332" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61283" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
