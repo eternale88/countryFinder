@@ -117,34 +117,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/main.js":[function(require,module,exports) {
-var countryForm = document.querySelector('#country-form');
-var results = document.querySelector('#results');
+})({"../../../../.nvm/versions/node/v8.10.0/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-if (countryForm) {
-  countryForm.addEventListener('submit', fetchCountries);
-} // Fetch animals from API
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
 
-
-function fetchCountries(e) {
-  //Stop from submitting to a file
-  e.preventDefault(); //Get user input
-
-  var country = document.querySelector('#country').value; //Fetch the Pets
-
-  fetch("https://restcountries.eu/rest/v2/name/".concat(country)).then(function (res) {
-    return res.json();
-  }).then(function (country) {
-    console.log(country[0]);
-    var output = "\n        <div class=\"row\">\n          <div class=\"col-md-4\">\n            <img src=\"".concat(country[0].flag, "\" class=\"img-thumbnail\"/>\n          </div>\n          <div class=\"col-md-8\">\n          <h2><strong><em>").concat(country[0].name, "</em></strong></h2>\n          <ul class=\"list-group\">\n          <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(country[0].capital, "</li>\n          <li class=\"list-group-item\"><strong>Region:</strong> ").concat(country[0].region, "</li>\n          ").concat(country[0].subregion ? "<li class=\"list-group-item\"><strong>Subregion:</strong> ".concat(country[0].subregion, "</li>") : "", "\n         \n          <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(country[0].capital, "</li>\n          <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(country[0].capital, "</li>\n          <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(country[0].capital, "</li>\n          <li></li>\n          <li></li>\n          <li></li>\n          <li></li>\n          </ul>\n          </div>\n        </div>\n      ");
-    results.innerHTML = '';
-    var doc = new DOMParser().parseFromString(output, 'text/html');
-    results.appendChild(doc.body);
-  }).catch(function (err) {
-    return err;
-  });
+  return bundleURL;
 }
-},{}],"../../../../.nvm/versions/node/v8.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../.nvm/versions/node/v8.10.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../.nvm/versions/node/v8.10.0/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../../../../.nvm/versions/node/v8.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -348,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../.nvm/versions/node/v8.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/main.js"], null)
-//# sourceMappingURL=/main.fb6bbcaf.js.map
+},{}]},{},["../../../../.nvm/versions/node/v8.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/index.js.map
