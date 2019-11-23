@@ -120,23 +120,26 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"js/main.js":[function(require,module,exports) {
 var countryForm = document.querySelector('#country-form');
 var results = document.querySelector('#results');
+var result = document.querySelector('#result');
 
 if (countryForm) {
-  countryForm.addEventListener('submit', fetchCountries);
+  countryForm.addEventListener('submit', function (e) {
+    //Stop from submitting to a file
+    e.preventDefault(); //Get user input
+
+    var country = document.querySelector('#country').value;
+    fetchCountries(country);
+  });
 } // Fetch animals from API
 
 
-function fetchCountries(e) {
-  //Stop from submitting to a file
-  e.preventDefault(); //Get user input
-
-  var country = document.querySelector('#country').value; //Fetch the Pets
-
+function fetchCountries(country) {
+  //Fetch the Country
   fetch("https://restcountries.eu/rest/v2/name/".concat(country)).then(function (res) {
     return res.json();
   }).then(function (country) {
-    console.log(country[0]);
-    var output = "\n        <div class=\"row\">\n          <div class=\"col-md-4\">\n            <img src=\"".concat(country[0].flag, "\" class=\"img-thumbnail\"/>\n          </div>\n          <div class=\"col-md-8\">\n          <h2><strong><em>").concat(country[0].name, "</em></strong></h2>\n          <ul class=\"list-group\">\n          <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(country[0].capital, "</li>\n          <li class=\"list-group-item\"><strong>Region:</strong> ").concat(country[0].region, "</li>\n          ").concat(country[0].subregion ? "<li class=\"list-group-item\"><strong>Subregion:</strong> ".concat(country[0].subregion, "</li>") : "", "\n         \n          <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(country[0].capital, "</li>\n          <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(country[0].capital, "</li>\n          <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(country[0].capital, "</li>\n          <li></li>\n          <li></li>\n          <li></li>\n          <li></li>\n          </ul>\n          </div>\n        </div>\n      ");
+    console.log(country[0].alpha2Code);
+    var output = "\n        <div class=\"row\">\n          <div class=\"col-md-6\">\n            <img src=\"".concat(country[0].flag, "\" class=\"img-thumbnail\"/>\n            </div>\n            <div class=\"col-md-6\">\n              <h2><strong><em>").concat(country[0].name, "</em></strong></h2>\n              <a onclick=\"countrySelected('").concat(country[0].alpha2Code, "')\" href=\"country.html\" class=\"btn btn-primary mt-3\">Country Details</a>\n            </div>\n          </div>\n        </div>\n      ");
     results.innerHTML = '';
     var doc = new DOMParser().parseFromString(output, 'text/html');
     results.appendChild(doc.body);
@@ -144,6 +147,63 @@ function fetchCountries(e) {
     return err;
   });
 }
+
+function countrySelected(id) {
+  localStorage.setItem('alpha2Code', id); //move to individual country page automatically
+
+  window.location = 'country.html';
+  return false;
+} // Fetch individual country  from API
+
+
+function getCountry() {
+  var country = localStorage.getItem('alpha2Code'); //Fetch the Pets
+
+  fetch("https://restcountries.eu/rest/v2/alpha/".concat(country)).then(function (res) {
+    return res.json();
+  }).then(function (count) {
+    console.log(count);
+    var output = "\n      <div class=\"row\">\n      <div class=\"col\">\n        <img src=\"".concat(count.flag, "\" class=\"img-thumbnail\"/>\n      </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col\">\n          <h2><strong><em>").concat(count.name, "</em></strong></h2>\n          <ul class=\"list-group\">\n            <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(count.capital, "</li>\n            <li class=\"list-group-item\"><strong>Region:</strong> ").concat(count.region, "</li>\n\n            <li class=\"list-group-item\"><strong>Subregion:</strong> ").concat(count.subregion, "</li>\n            ").concat(count.regionalBlocs[0] ? "<li class=\"list-group-item\"><strong>Regional Bloc:</strong/> (".concat(count.regionalBlocs[0].acronym, ") - <span>").concat(count.regionalBlocs[0].name, "</span></li>") : "", "\n            \n          \n            <li class=\"list-group-item\"><strong>Population:</strong> ").concat(count.population, "</li>\n            <li class=\"list-group-item\"><strong>Languages Spoken:</strong>\n            ").concat(count.languages.map(function (lang) {
+      return " <span>".concat(lang.name, "</span>");
+    }), "\n             </li>\n           \n            <li class=\"list-group-item\"><strong>Capital:</strong> ").concat(count.capital, "</li>\n          </ul>\n        </div>\n      \n      ");
+    result.innerHTML = '';
+    var doc = new DOMParser().parseFromString(output, 'text/html');
+    result.appendChild(doc.body);
+  }).catch(function (err) {
+    return err;
+  });
+} // document.addEventListener('click', (e) => {
+//   e.preventDefault()
+//   getMovie()
+// })
+//     function employee(name, jobtitle, born)
+// {
+// 	this.name = name
+// 	this.jobtitile = jobtitle
+// 	this.born = born
+// }
+// var fred = new employee("Fred Flintstone", "Caveman", 1970)
+// employee.prototype.salary = null
+// fred.salary = 20000
+// document.write(fred.salary)
+// function constfuncs() {
+//   var funcs = []
+//    for(var i = 0; i < 10; i++) 
+//    funcs[i] = function() { return i}
+//    return funcs
+// }
+// var funcs = constfuncs()
+// console.log(funcs[5] ())
+// function Employee(firstName, lastName)
+// {
+//      this.firstName = firstName;
+//      this.lastName = lastName;
+// }
+// Employee.prototype.setOccupation = function() {
+// console.log('hello')}
+// let guy = new Employee('ethan', 'R')
+// console.log(guy.setOccupation())
+// country page
 },{}],"../../../../.nvm/versions/node/v8.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -172,7 +232,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60189" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51764" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
