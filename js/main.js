@@ -1,4 +1,13 @@
+// var requirejs = require('requirejs');
 
+// requirejs.config({
+//     //Pass the top-level main.js/index.js require
+//     //function to requirejs so that node modules
+//     //are loaded relative to the top-level JS file.
+//     nodeRequire: require
+// })
+
+// const converter = requirejs('number-to-words')
 
 const countryForm = document.querySelector('#country-form')
 const results = document.querySelector('#results')
@@ -66,38 +75,54 @@ function countrySelected(id) {
     .then(res => res.json())
     .then((count) => { 
       console.log(count)
-      let output = `
-      <div class="row">
-      <div class="col">
-        <img src="${count.flag}" class="img-thumbnail"/>
-      </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <h2><strong><em>${count.name}</em></strong></h2>
-          <ul class="list-group">
-            <li class="list-group-item"><strong>Capital:</strong> ${count.capital}</li>
-            <li class="list-group-item"><strong>Region:</strong> ${count.region}</li>
+      // let population = converter.toWords(count.population)
 
-            <li class="list-group-item"><strong>Subregion:</strong> ${count.subregion}</li>
-            ${
-              count.regionalBlocs[0] 
-              ? `<li class="list-group-item"><strong>Regional Bloc:</strong/> (${count.regionalBlocs[0].acronym}) - <span>${count.regionalBlocs[0].name}</span></li>`
-              : ``
-            }
-            
-          
-            <li class="list-group-item"><strong>Population:</strong> ${count.population}</li>
-            <li class="list-group-item"><strong>Languages Spoken:</strong>
-            ${
-             count.languages.map((lang) => {
-                return ` <span>${lang.name}</span>`
-             })
-            }
-             </li>
-           
-            <li class="list-group-item"><strong>Capital:</strong> ${count.capital}</li>
-          </ul>
+      let output = `
+      <div class="card card-body bg-light">
+
+      <div class="row">
+        <div class="col-6-md">
+          <img src="${count.flag}" class="img-fluid img-thumbnail" style= "width: 70%;"/>
+        </div>
+        <div class="col-6-md ml-5">
+          <h2 class="mt-5"><strong><em>${count.name}</em></strong></h2>
+          <h2><em>${count.nativeName}</em></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mt-5">
+          <div class="card card-body bg-secondary">
+              <ul class="list-group">
+                <li class="list-group-item"><strong>Capital:</strong> ${count.capital}</li>
+                <li class="list-group-item"><strong>Region:</strong> ${count.region}</li>
+
+                <li class="list-group-item"><strong>Subregion:</strong> ${count.subregion}</li>
+                ${
+                  count.regionalBlocs[0] 
+                  ? `<li class="list-group-item"><strong>Regional Intergovernmental Organization:</strong/> (${count.regionalBlocs[0].acronym}) - <span>${count.regionalBlocs[0].name}</span></li>`
+                  : ``
+                }
+                
+              
+                <li class="list-group-item"><strong>Population:</strong> ${count.population}</li>
+                <li class="list-group-item"><strong>Languages Spoken: <span>${count.languages.length} : </strong>
+                ${
+                count.languages.map((lang) => {
+                    return ` <span>${lang.name}</span>`
+                })
+                }
+                </li>
+              
+                <li class="list-group-item"><strong>Timezones: <span>${count.timezones.length} : </span></strong>
+                  ${
+                    count.timezones.map(timezone => ` <span>${timezone}</span>`)
+                  }
+                
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
         </div>
       
       `
