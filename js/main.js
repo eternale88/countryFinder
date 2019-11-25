@@ -1,13 +1,4 @@
-// var requirejs = require('requirejs');
 
-// requirejs.config({
-//     //Pass the top-level main.js/index.js require
-//     //function to requirejs so that node modules
-//     //are loaded relative to the top-level JS file.
-//     nodeRequire: require
-// })
-
-// const converter = requirejs('number-to-words')
 
 const countryForm = document.querySelector('#country-form')
 const results = document.querySelector('#results')
@@ -67,7 +58,7 @@ function countrySelected(id) {
   return false
 }
 // Fetch individual country  from API
- function getCountry() {
+function getCountry() {
   let country = localStorage.getItem('alpha2Code')
     
     //Fetch the Pets
@@ -119,6 +110,12 @@ function countrySelected(id) {
                   }
                 
                 </li>
+                <li class="list-group-item"><strong>Currencies:</strong>
+                  ${
+                    count.currencies.map(currency => ` <span>${currency.name}</span>`)
+                  }
+                
+                </li>
               </ul>
             </div>
           </div>
@@ -137,44 +134,3 @@ function countrySelected(id) {
 
 }
 
-// document.addEventListener('click', (e) => {
-//   e.preventDefault()
-//   getMovie()
-  
-// })
-
-
-//     function employee(name, jobtitle, born)
-// {
-// 	this.name = name
-// 	this.jobtitile = jobtitle
-// 	this.born = born
-// }
-
-// var fred = new employee("Fred Flintstone", "Caveman", 1970)
-// employee.prototype.salary = null
-// fred.salary = 20000
-// document.write(fred.salary)
-
-
-
-// function constfuncs() {
-//   var funcs = []
-//    for(var i = 0; i < 10; i++) 
-//    funcs[i] = function() { return i}
-//    return funcs
-// }
-// var funcs = constfuncs()
-// console.log(funcs[5] ())
-
-// function Employee(firstName, lastName)
-// {
-//      this.firstName = firstName;
-//      this.lastName = lastName;
-// }
-// Employee.prototype.setOccupation = function() {
-// console.log('hello')}
-// let guy = new Employee('ethan', 'R')
-// console.log(guy.setOccupation())
-
-// country page
