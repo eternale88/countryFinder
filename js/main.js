@@ -4,7 +4,11 @@ const countryForm = document.querySelector('#country-form')
 const results = document.querySelector('#results')
 const result = document.querySelector('#result')
 
+// Call flags on page load
+document.addEventListener('DOMContentLoaded', fetchFlags()
+)
 
+// get data from country form
 if(countryForm) {
   countryForm.addEventListener('submit', (e) => {
       //Stop from submitting to a file
@@ -19,14 +23,66 @@ if(countryForm) {
   })
 }
 
-// Fetch animals from API
-function fetchCountries(country) {
+// fetch initial country flags from API and disppay on page render
+async function fetchFlags() {
+
+   await fetch(`https://restcountries.eu/rest/v2/all/?fields=flag;name`)
+  .then(res => res.json())
+  .then((flags) => {
+    return flags.sort(() => {
+      return 0.5 - Math.random()
+    })
+  })
+  .then((flag) => {
+
+    let output = `
+    <div class="card card-body bg-light" id="flag-info">
+
+      <div class="row">
+        <div class="col-md-3">
+          <img src="${flag[0].flag}" title="${flag[0].name}" alt="${flag[0].name}" class="img-fluid" />
+        </div>
+        <div class="col-md-3">
+          <img src="${flag[1].flag}" title="${flag[1].name}" alt="${flag[1].name}" class="img-fluid" />
+        </div>
+        <div class="col-md-3">
+          <img src="${flag[2].flag}" title="${flag[2].name}" alt="${flag[2].name}" class="img-fluid" />
+        </div>
+        <div class="col-md-3">
+          <img src="${flag[3].flag}" title="${flag[3].name}" alt="${flag[3].name}" class="img-fluid" />
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-3">
+          <img src="${flag[4].flag}" title="${flag[4].name}" alt="${flag[4].name}" class="img-fluid" />
+        </div>
+        <div class="col-md-3">
+          <img src="${flag[5].flag}" title="${flag[5].name}" alt="${flag[5].name}" class="img-fluid" />
+        </div>
+        <div class="col-md-3">
+          <img src="${flag[6].flag}" title="${flag[6].name}" alt="${flag[6].name}" class="img-fluid" />
+        </div>
+        <div class="col-md-3">
+          <img src="${flag[7].flag}" title="${flag[7].name}" alt="${flag[7].name}" class="img-fluid" />
+        </div>
+      </div>
+      </div>
+    `
+    // results.innerHTML = ''
+    let doc = new DOMParser().parseFromString(output, 'text/html')
+    results.appendChild(doc.body)
+  })
+  .catch(err => err)
+}
+
+// Fetch country from API
+async function fetchCountries(country) {
 
     //Fetch the Country
-    fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    await fetch(`https://restcountries.eu/rest/v2/name/${country}`)
     .then(res => res.json())
     .then((country) => { 
-      console.log(country[0].alpha2Code)
+
       let output = `
         <div class="row">
           <div class="col-md-6">
@@ -57,16 +113,14 @@ function countrySelected(id) {
   window.location = 'country.html'
   return false
 }
-// Fetch individual country  from API
-function getCountry() {
+// Fetch individual country details from API
+async function getCountry() {
   let country = localStorage.getItem('alpha2Code')
     
-    //Fetch the Pets
-     fetch(`https://restcountries.eu/rest/v2/alpha/${country}`)
+    //Fetch the details
+     await fetch(`https://restcountries.eu/rest/v2/alpha/${country}`)
     .then(res => res.json())
     .then((count) => { 
-      console.log(count)
-      // let population = converter.toWords(count.population)
 
       let output = `
       <div class="card card-body bg-light">
