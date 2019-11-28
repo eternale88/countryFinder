@@ -83,6 +83,9 @@ async function fetchFlags() {
 async function fetchCountries(country) {
 
     //Fetch the Country
+    // in future replace with fullName endpoint to get Guinea
+    // might break some of the other countries due to values
+    // not being the exact same as full name (.name field)
     await fetch(`https://restcountries.eu/rest/v2/name/${country}`)
     .then(res => res.json())
     .then((country) => { 
