@@ -4,7 +4,7 @@
 > A JS app that uses the Rest Countries API to allow users to select and dynamically display information about all of the countries in the world, styles with Bootstrap 4, JavaScript.
 
 #### Deployed to Netlify
-> https://gifted-hamilton-0ce0cf.netlify.com
+> https://vigilant-mcnulty-821803.netlify.com/
 
 #### Docs for dependencies:
 * [Rest Countries API](https://restcountries.eu/#rest-countries "Rest Countries API")
