@@ -7,6 +7,9 @@ const result = document.querySelector('#result')
 // Call flags on page load
 document.addEventListener('DOMContentLoaded', fetchFlags()
 )
+const selectFlag = document.querySelector('#country')
+// let trend = null
+
 
 // get data from country form
 if(countryForm) {
@@ -29,6 +32,7 @@ async function fetchFlags() {
    await fetch(`https://restcountries.eu/rest/v2/all/?fields=flag;name`)
   .then(res => res.json())
   .then((flags) => {
+    //randomly sort flags
     return flags.sort(() => {
       return 0.5 - Math.random()
     })
@@ -40,30 +44,30 @@ async function fetchFlags() {
 
       <div class="row">
         <div class="col-md-3">
-          <img src="${flag[0].flag}" title="${flag[0].name}" alt="${flag[0].name}" class="img-fluid" />
+          <img src="${flag[0].flag}" title="${flag[0].name}" alt="${flag[0].name}" class="img-fluid img-thumbnail" />
         </div>
         <div class="col-md-3">
-          <img src="${flag[1].flag}" title="${flag[1].name}" alt="${flag[1].name}" class="img-fluid" />
+          <img src="${flag[1].flag}" title="${flag[1].name}" alt="${flag[1].name}" class="img-fluid img-thumbnail" />
         </div>
         <div class="col-md-3">
-          <img src="${flag[2].flag}" title="${flag[2].name}" alt="${flag[2].name}" class="img-fluid" />
+          <img src="${flag[2].flag}" title="${flag[2].name}" alt="${flag[2].name}" class="img-fluid img-thumbnail" />
         </div>
         <div class="col-md-3">
-          <img src="${flag[3].flag}" title="${flag[3].name}" alt="${flag[3].name}" class="img-fluid" />
+          <img src="${flag[3].flag}" title="${flag[3].name}" alt="${flag[3].name}" class="img-fluid img-thumbnail" />
         </div>
       </div>
       <div class="row mt-5">
         <div class="col-md-3">
-          <img src="${flag[4].flag}" title="${flag[4].name}" alt="${flag[4].name}" class="img-fluid" />
+          <img src="${flag[4].flag}" title="${flag[4].name}" alt="${flag[4].name}" class="img-fluid img-thumbnail" />
         </div>
         <div class="col-md-3">
-          <img src="${flag[5].flag}" title="${flag[5].name}" alt="${flag[5].name}" class="img-fluid" />
+          <img src="${flag[5].flag}" title="${flag[5].name}" alt="${flag[5].name}" class="img-fluid img-thumbnail" />
         </div>
         <div class="col-md-3">
-          <img src="${flag[6].flag}" title="${flag[6].name}" alt="${flag[6].name}" class="img-fluid" />
+          <img src="${flag[6].flag}" title="${flag[6].name}" alt="${flag[6].name}" class="img-fluid img-thumbnail" />
         </div>
         <div class="col-md-3">
-          <img src="${flag[7].flag}" title="${flag[7].name}" alt="${flag[7].name}" class="img-fluid" />
+          <img src="${flag[7].flag}" title="${flag[7].name}" alt="${flag[7].name}" class="img-fluid img-thumbnail" />
         </div>
       </div>
       </div>
