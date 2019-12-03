@@ -1,4 +1,5 @@
 @import 'utilities';
+@import 'config';
 
 .form-control {
   cursor: pointer;
@@ -11,12 +12,8 @@
   border: 1px solid #ced4da;
 }
 
-#country:hover {
+select:hover {
   height: 3.5rem;
-}
-input[type='submit'] {
-  transition: all 0.5s ease-in !important;
-  margin-bottom: 1rem;
 }
 
 /* reset browser defaults */

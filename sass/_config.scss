@@ -1,0 +1,25 @@
+// Margin and padding loop
+
+$spaceamounts: (1, 2, 3, 4, 5);
+
+@each $space in $spaceamounts {
+  // set all around margins
+  .m-#{$space} {
+    margin: #{$space}rem;
+  }
+
+  // set top and bottom margins - y axis
+  .my-#{$space} {
+    margin: #{$space}rem 0;
+  }
+
+  // set all around padding
+  .p-#{$space} {
+    padding: #{$space}rem;
+  }
+
+  // set verticle padding
+  .py-#{$space} {
+    padding: #{$space}rem 0;
+  }
+}
