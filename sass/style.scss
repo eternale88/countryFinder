@@ -26,7 +26,7 @@ select:hover {
 
 /* reset browser defaults */
 body {
-  font: 1rem 'Roboto', Arial, Helvetica, sans-serif;
+  font: 1.5rem 'Roboto', Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   padding: 0;
@@ -52,7 +52,34 @@ header {
   }
 }
 
-h3 {
+h3,
+h2 {
   margin: 0;
   text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+// lists
+.list-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }

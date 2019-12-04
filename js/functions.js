@@ -1,11 +1,12 @@
-// check if 'Guinea' to make API call more specific and 
+// check if 'Guinea' to make API call more specific and
 // avoid wrong data fetch, due to 3 countries with  similar names
 async function checkIfGuinea(country) {
   if (country === 'Guinea') {
-    await fetch(`https://restcountries.eu/rest/v2/name/${country}?fullText=true`)
-      .then(res => res.json())
-      .then((country) => { 
-
+    await fetch(
+      `https://restcountries.eu/rest/v2/name/${country}?fullText=true`
+    )
+      .then((res) => res.json())
+      .then((country) => {
         let output = `
           <div class="row">
             <div class="col-md-6">
@@ -20,31 +21,25 @@ async function checkIfGuinea(country) {
         `
         results.innerHTML = ''
         let doc = new DOMParser().parseFromString(output, 'text/html')
-          results.appendChild(doc.body)
-        
-
+        results.appendChild(doc.body)
       })
 
-      .catch(err => err)
-    
+      .catch((err) => err)
   }
 }
 
-
 // fetch initial country flags from API and display on page render
 async function fetchFlags() {
-
   await fetch(`https://restcountries.eu/rest/v2/all/?fields=flag;name`)
- .then(res => res.json())
- .then((flags) => {
-   //randomly sort flags
-   return flags.sort(() => {
-     return 0.5 - Math.random()
-   })
- })
- .then((flag) => {
-
-   let output = `
+    .then((res) => res.json())
+    .then((flags) => {
+      //randomly sort flags
+      return flags.sort(() => {
+        return 0.5 - Math.random()
+      })
+    })
+    .then((flag) => {
+      let output = `
    <div class="card card-body bg-light" id="flag-info">
 
      <div class="row">
@@ -77,30 +72,27 @@ async function fetchFlags() {
      </div>
      </div>
    `
-   // results.innerHTML = ''
-   let doc = new DOMParser().parseFromString(output, 'text/html')
-   results.appendChild(doc.body)
- })
- .catch(err => err)
+      // results.innerHTML = ''
+      let doc = new DOMParser().parseFromString(output, 'text/html')
+      results.appendChild(doc.body)
+    })
+    .catch((err) => err)
 }
-
 
 // Fetch country from API
 async function fetchCountries(country) {
-
   //Fetch the Country
   // in future replace with fullName endpoint to get Guinea
   // might break some of the other countries due to values
   // not being the exact same as full name (.name field)
   if (country !== 'Guinea') {
     await fetch(`https://restcountries.eu/rest/v2/name/${country}`)
-    .then(res => res.json())
-    .then((country) => { 
-
-      let output = `
+      .then((res) => res.json())
+      .then((country) => {
+        let output = `
         <div class="row">
           <div class="col-md-6">
-            <img src="${country[0].flag}" class="img-thumbnail"/>
+            <img src="${country[0].flag}" class="img-thumbnail-lg"/>
             </div>
             <div class="col-md-6">
               <h2><strong><em>${country[0].name}</em></strong></h2>
@@ -109,85 +101,93 @@ async function fetchCountries(country) {
           </div>
         </div>
       `
-      results.innerHTML = ''
-      let doc = new DOMParser().parseFromString(output, 'text/html')
+        results.innerHTML = ''
+        let doc = new DOMParser().parseFromString(output, 'text/html')
         results.appendChild(doc.body)
-      
+      })
 
-    })
-
-    .catch(err => err)
-
+      .catch((err) => err)
   } else {
     checkIfGuinea(country)
   }
-
 }
 
 function countrySelected(id) {
-localStorage.setItem('alpha2Code', id )
+  localStorage.setItem('alpha2Code', id)
 
-//move to individual country page automatically
-window.location = 'country.html'
-return false
+  //move to individual country page automatically
+  window.location = 'country.html'
+  return false
 }
 
 // Fetch individual country details from API, called in scrip
 // tag on country page
 async function getCountry() {
-let country = localStorage.getItem('alpha2Code')
-  
-  //Fetch the details
-   await fetch(`https://restcountries.eu/rest/v2/alpha/${country}`)
-  .then(res => res.json())
-  .then((count) => { 
+  let country = localStorage.getItem('alpha2Code')
 
-    let output = `
-    <div class="card card-body bg-light">
+  //Fetch the details
+  await fetch(`https://restcountries.eu/rest/v2/alpha/${country}`)
+    .then((res) => res.json())
+    .then((count) => {
+      let output = `
+    <div class="card card-body bg-light m-2 p-3">
 
     <div class="row">
-      <div class="col-6-md">
-        <img src="${count.flag}" class="img-fluid img-thumbnail" style= "width: 70%;"/>
+      <div class="col-md-6">
+        <img src="${
+          count.flag
+        }" class="img-fluid img-thumbnail" style= "width: 70%;"/>
       </div>
-      <div class="col-6-md ml-5">
+      <div class="col-md-6 ml-5">
         <h2 class="mt-5"><strong><em>${count.name}</em></strong></h2>
-        <h2><em>${count.nativeName}</em></h2>
+        <p style="margin: 0;"><i>Native Spelling</i></p>
+        <h2 style="margin: 0;"><em>${count.nativeName}</em></h2>
       </div>
     </div>
     <div class="row">
       <div class="col mt-5">
-        <div class="card card-body bg-secondary">
+        <div class="card card-body bg-secondary my-2">
             <ul class="list-group">
-              <li class="list-group-item"><strong>Capital:</strong> ${count.capital}</li>
-              <li class="list-group-item"><strong>Region:</strong> ${count.region}</li>
+              <li class="list-group-item"><strong>Capital:</strong> ${
+                count.capital
+              }</li>
+              <li class="list-group-item"><strong>Region:</strong> ${
+                count.region
+              }</li>
 
-              <li class="list-group-item"><strong>Subregion:</strong> ${count.subregion}</li>
+              <li class="list-group-item"><strong>Subregion:</strong> ${
+                count.subregion
+              }</li>
               ${
-                count.regionalBlocs[0] 
-                ? `<li class="list-group-item"><strong>Regional Intergovernmental Organization:</strong/> (${count.regionalBlocs[0].acronym}) - <span>${count.regionalBlocs[0].name}</span></li>`
-                : ``
+                count.regionalBlocs[0]
+                  ? `<li class="list-group-item"><strong>Regional Intergovernmental Organization:</strong/> (${count.regionalBlocs[0].acronym}) - <span>${count.regionalBlocs[0].name}</span></li>`
+                  : ``
               }
               
             
-              <li class="list-group-item"><strong>Population:</strong> ${count.population}</li>
-              <li class="list-group-item"><strong>Languages Spoken: <span>${count.languages.length} : </strong>
-              ${
-              count.languages.map((lang) => {
-                  return ` <span>${lang.name}</span>`
-              })
-              }
+              <li class="list-group-item"><strong>Population:</strong> ${
+                count.population
+              }</li>
+              <li class="list-group-item"><strong>Languages Spoken: <span>${
+                count.languages.length
+              } : </strong>
+              ${count.languages.map((lang) => {
+                return ` <span>${lang.name}</span>`
+              })}
               </li>
             
-              <li class="list-group-item"><strong>Timezones: <span>${count.timezones.length} : </span></strong>
-                ${
-                  count.timezones.map(timezone => ` <span>${timezone}</span>`)
-                }
+              <li class="list-group-item"><strong>Timezones: <span>${
+                count.timezones.length
+              } : </span></strong>
+                ${count.timezones.map(
+                  (timezone) => ` <span>${timezone}</span>`
+                )}
               
               </li>
               <li class="list-group-item"><strong>Currencies:</strong>
-                ${
-                  count.currencies.map(currency => ` <span>${currency.name}</span>`)
-                }
+                ${count.currencies.map(
+                  (currency) => ` <span>${currency.name}</span>`
+                )}
               
               </li>
             </ul>
@@ -197,14 +197,10 @@ let country = localStorage.getItem('alpha2Code')
       </div>
     
     `
-    result.innerHTML = ''
-    let doc = new DOMParser().parseFromString(output, 'text/html')
+      result.innerHTML = ''
+      let doc = new DOMParser().parseFromString(output, 'text/html')
       result.appendChild(doc.body)
-    
+    })
 
-  })
-
-  .catch(err => err)
-
+    .catch((err) => err)
 }
-
