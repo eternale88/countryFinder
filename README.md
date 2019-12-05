@@ -1,14 +1,13 @@
 # Country Finder App
 #### A JavaScript app.
 
-> A JS app that uses the Rest Countries API to allow users to select and dynamically display information about all of the countries in the world, styles with Bootstrap 4, JavaScript.
+> A JS app that uses the Rest Countries API to allow users to select and dynamically display information about all of the countries in the world, styles CSS with Sass as a preprocessor, JavaScript ES6.
 
 #### Deployed to Netlify
 > https://serene-goodall-fe31e7.netlify.com/
 
 #### Docs for dependencies:
 * [Rest Countries API](https://restcountries.eu/#rest-countries "Rest Countries API")
-* [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/ "Bootstrap 4")
 
 
 #### To download and run the project
