@@ -110,8 +110,11 @@
 }
 
 label {
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgb(153, 143, 143);
   display: inline-block;
   margin-bottom: 0.5rem;
+  margin-right: 1rem;
 }
 input,
 button,
@@ -190,6 +193,16 @@ textarea {
 
   .name {
     text-align: center;
-    max-width: 100%;
+    max-width: 90%;
+  }
+
+  .flag {
+    text-align: center;
+    max-width: inherit;
+  }
+
+  label {
+    display: block;
+    margin-top: 1rem;
   }
 }

@@ -43,30 +43,30 @@ async function fetchFlags() {
    <div class="card card-body bg-light" id="flag-info">
 
      <div class="row">
-       <div class="col-md-3">
+       <div class="col-md-3 flag">
          <img src="${flag[0].flag}" title="${flag[0].name}" alt="${flag[0].name}" class="img-fluid img-thumbnail" />
        </div>
-       <div class="col-md-3">
+       <div class="col-md-3 flag">
          <img src="${flag[1].flag}" title="${flag[1].name}" alt="${flag[1].name}" class="img-fluid img-thumbnail" />
        </div>
-       <div class="col-md-3">
+       <div class="col-md-3 flag">
          <img src="${flag[2].flag}" title="${flag[2].name}" alt="${flag[2].name}" class="img-fluid img-thumbnail" />
        </div>
-       <div class="col-md-3">
+       <div class="col-md-3 flag">
          <img src="${flag[3].flag}" title="${flag[3].name}" alt="${flag[3].name}" class="img-fluid img-thumbnail" />
        </div>
      </div>
      <div class="row mt-5">
-       <div class="col-md-3">
+       <div class="col-md-3 flag">
          <img src="${flag[4].flag}" title="${flag[4].name}" alt="${flag[4].name}" class="img-fluid img-thumbnail" />
        </div>
-       <div class="col-md-3">
+       <div class="col-md-3 flag">
          <img src="${flag[5].flag}" title="${flag[5].name}" alt="${flag[5].name}" class="img-fluid img-thumbnail" />
        </div>
-       <div class="col-md-3">
+       <div class="col-md-3 flag">
          <img src="${flag[6].flag}" title="${flag[6].name}" alt="${flag[6].name}" class="img-fluid img-thumbnail" />
        </div>
-       <div class="col-md-3">
+       <div class="col-md-3 flag">
          <img src="${flag[7].flag}" title="${flag[7].name}" alt="${flag[7].name}" class="img-fluid img-thumbnail" />
        </div>
      </div>
@@ -91,10 +91,10 @@ async function fetchCountries(country) {
       .then((country) => {
         let output = `
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 name">
             <img src="${country[0].flag}" class="img-thumbnail-lg"/>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 name">
               <h2><strong><em>${country[0].name}</em></strong></h2>
               <a onclick="countrySelected('${country[0].alpha2Code}')" href="country.html" class="btn btn-primary mt-3">Country Details</a>
             </div>
@@ -132,7 +132,7 @@ async function getCountry() {
       let output = `
     <div class="card card-body bg-light m-2 p-3">
 
-    <div class="row">
+    <div class="row name-div">
       <div class="col-md-6 col-sm-12 name">
         <img src="${
           count.flag
