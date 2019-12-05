@@ -34,6 +34,13 @@
   margin-right: -15px;
   margin-left: -15px;
 }
+
+.col-md-12 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
 .col-md-6 {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 50%;
@@ -172,5 +179,17 @@ textarea {
   }
   &:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+}
+
+// Responsivness on country details
+@media (max-width: 576px) {
+  .row {
+    display: block;
+  }
+
+  .name {
+    text-align: center;
+    max-width: 100%;
   }
 }

@@ -133,20 +133,20 @@ async function getCountry() {
     <div class="card card-body bg-light m-2 p-3">
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-12 name">
         <img src="${
           count.flag
         }" class="img-fluid img-thumbnail" style= "width: 70%;"/>
       </div>
-      <div class="col-md-6 ml-5">
+      <div class="col-md-6 col-sm-12 ml-5 name">
         <h2 class="mt-5"><strong><em>${count.name}</em></strong></h2>
         <p style="margin: 0;"><i>Native Spelling</i></p>
         <h2 style="margin: 0;"><em>${count.nativeName}</em></h2>
       </div>
     </div>
-    <div class="row">
-      <div class="col mt-5">
-        <div class="card card-body bg-secondary my-2">
+    <div class="">
+      <div id="info">
+        <div class="card card-body bg-secondary m-2">
             <ul class="list-group">
               <li class="list-group-item"><strong>Capital:</strong> ${
                 count.capital
